@@ -22,7 +22,7 @@ public class Server implements Runnable {
 			out.println("Enter your name");
 			out.flush();
 			user = in.readLine();
-			out.println("Welcome " + user);
+			out.println(user);
 			out.flush();
 			while (true) {
 				//System.out.println(Server.message);

@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class Client implements Runnable {
 	private BufferedReader in;
-	boolean waiting = true;
 	public static void main(String[] args) throws IOException, InterruptedException {
 		BufferedReader b = new BufferedReader(new FileReader(new File("..\\ip.txt"))); //this needs to be revised at some point
 		Socket s = new Socket(b.readLine(), 45454);
