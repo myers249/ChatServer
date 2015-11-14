@@ -2,6 +2,8 @@ package client;
 
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -9,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class GUI {
+	
 	private JTextArea chat;
 	public JTextArea getChat() {
 		return chat;
@@ -27,6 +30,19 @@ public class GUI {
 		JTextField textBox = new JTextField();
 		textBox.setSize(300, 30);
 		textBox.setLocation(0, 500);
+		textBox.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent keyEvent) {
+				if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+					String message;
+					if (!(message = textBox.getText()).equals("")) {
+						Client.setMessage(message);
+						textBox.setText("");
+					}
+				}
+			}
+			public void keyTyped(KeyEvent keyEvent) {}
+			public void keyReleased(KeyEvent keyEvent) {}
+		});
 		chat = new JTextArea();
 		JScrollPane scroll = new JScrollPane(chat, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		//chat.setSize(400, 500);
@@ -44,7 +60,7 @@ public class GUI {
 		//frame.add(chat);
 		frame.add(scroll);
 		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	//test GUI
 	public static void main(String[] args) {
