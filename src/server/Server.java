@@ -7,8 +7,9 @@ import java.net.Socket;
 
 public class Server implements Runnable {
 	Socket socket;
-	static String message = "welcome to the server";
+	static String message;
 	static boolean ready = false;
+	String user;
 	public Server(Socket socket) {
 		this.socket = socket;
 	}
@@ -16,7 +17,12 @@ public class Server implements Runnable {
 		try {
 			PrintWriter out = new PrintWriter(socket.getOutputStream());
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			out.println(Server.message);
+			out.println("Welcome to the server");
+			out.flush();
+			out.println("Enter your name");
+			out.flush();
+			user = in.readLine();
+			out.println("Welcome " + user);
 			out.flush();
 			while (true) {
 				//System.out.println(Server.message);
@@ -35,7 +41,7 @@ public class Server implements Runnable {
 	}
 	public synchronized void getMessages(BufferedReader in) throws IOException {
 		String message = in.readLine();
-		setMessage(message);
+		setMessage(user + ": " + message);
 		Server.ready = true;
 	}
 	private static void setMessage(String message) {

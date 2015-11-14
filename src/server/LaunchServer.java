@@ -11,6 +11,7 @@ public class LaunchServer {
 			Socket socket = serverSocket.accept();
 			Server server = new Server(socket);
 			new Thread(server).start();
+			System.out.println("Client connected");
 		}
 		//new Server(45454).run();
 	}
