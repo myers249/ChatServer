@@ -1,2 +1,0 @@
-INDEX VERSION 1.127+C:\Users\Joey\Documents\JavaChatServer\.metadata\.plugins\org.eclipse.jdt.core
-1668301934.index
