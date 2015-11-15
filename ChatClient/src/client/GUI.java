@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 public class GUI {
 	
 	private JTextArea chat;
+	private JTextArea userList;
 	public JTextArea getChat() {
 		return chat;
 	}
@@ -44,7 +46,9 @@ public class GUI {
 			public void keyReleased(KeyEvent keyEvent) {}
 		});
 		chat = new JTextArea();
+		userList = new JTextArea();
 		JScrollPane scroll = new JScrollPane(chat, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane userScroll = new JScrollPane(userList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		//chat.setSize(400, 500);
 		//chat.setLocation(10, 0);
 		chat.setLineWrap(true);
@@ -52,14 +56,36 @@ public class GUI {
 		chat.setEditable(false);
 		chat.setForeground(Color.white);
 		chat.setBackground(Color.black);
+		userList.setLayout(null);
+		userList.setEditable(false);
+		userList.setForeground(Color.white);
+		userList.setBackground(Color.black);
 		scroll.setVisible(true);
 		scroll.setSize(400, 500);
 		scroll.setLocation(0, 0);
+		userScroll.setVisible(true);
+		userScroll.setSize(165, 500);
+		userScroll.setLocation(400, 0);
 		frame.add(sendMessage);
 		frame.add(textBox);
 		//frame.add(chat);
 		frame.add(scroll);
+		frame.add(userScroll);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
+	public String getScreenName() {
+		do {
+		String user =  JOptionPane.showInputDialog(null, "Enter a screen name", "Screen Name");
+		if (user == null || user.equals(""))
+			continue;
+		else 
+			return user;
+		}while (true);
+	}
+	public JTextArea getUserList() {
+		return userList;
+	}
+	
 }
