@@ -2,6 +2,8 @@ package client;
 
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -25,8 +27,7 @@ public class GUI {
 		frame.getContentPane().setBackground(new Color(4, 152, 201));
 		frame.setResizable(false);
 		frame.setLayout(null);
-		Button sendMessage = new Button();
-		sendMessage.setLabel("Send Message");
+		Button sendMessage = new Button("Send Message");
 		sendMessage.setSize(100, 30);
 		sendMessage.setLocation(300, 500);
 		JTextField textBox = new JTextField();
@@ -44,6 +45,15 @@ public class GUI {
 			}
 			public void keyTyped(KeyEvent keyEvent) {}
 			public void keyReleased(KeyEvent keyEvent) {}
+		});
+		sendMessage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String message;
+				if (!(message = textBox.getText()).equals("")) {
+					Client.setMessage(message);
+					textBox.setText("");
+				}
+			}
 		});
 		chat = new JTextArea();
 		userList = new JTextArea();
